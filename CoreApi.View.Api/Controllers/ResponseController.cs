@@ -6,14 +6,14 @@ using CoreApi.Platform.Logic.Managers;
 namespace CoreApi.View.Api.Controllers
 {
     [Route("/response")]
-    public class ResponseController(IResponseManager responseService) : Controller
+    public class ResponseController(IResponseManager responseManager) : Controller
     {
         [HttpGet]
         [Produces("application/json")]
-        public BasicResponse GetBasicResponse(string? query) => responseService.GetBasicResponse(query);
+        public BasicResponse GetBasicResponse(string? query) => responseManager.GetBasicResponse(query);
 
         [HttpGet("complex")]
         [Produces("application/json")]
-        public ComplexResponse GetComplexResponse(string? vehicle) => responseService.GetComplexResponse(vehicle);
+        public ComplexResponse GetComplexResponse(string? vehicle) => responseManager.GetComplexResponse(vehicle);
     }
 }
