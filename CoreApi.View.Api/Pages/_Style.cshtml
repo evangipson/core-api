@@ -1,0 +1,60 @@
+﻿<style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        background-color: #121212;
+        color: #cdcdcd;
+        font-size: 20px;
+        font-family: monospace;
+    }
+
+    body {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+    }
+
+    h1, h2, p, ul {
+        margin: 0;
+    }
+
+    h2 {
+        font-size: 28px;
+    }
+
+    a, a:hover, a:active, a:focus, a:visited {
+        color: #cdcdcd;
+    }
+
+    .core-api {
+        display: flex;
+        flex-flow: column nowrap;
+        max-width: 800px;
+        margin: 24px;
+    }
+
+    .core-api > * + *:not(ul) {
+        margin-top: 24px;
+    }
+
+    .core-api ul,
+    .core-api li {
+        margin: 0;
+        padding: 0;
+    }
+
+    .core-api ul {
+        display: flex;
+        flex-flow: column nowrap;
+        font-size: 18px;
+    }
+
+    .core-api li {
+        list-style-type: none;
+        margin-top: 4px;
+    }
+
+    .core-api__version {
+        font-size: 20px;
+    }
+</style>

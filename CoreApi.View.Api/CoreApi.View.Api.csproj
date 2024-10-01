@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+	<PackageId>CoreApi</PackageId>
+	<Version>0.0.1</Version>
+	<Description>A simple .NET 8.0 web API that leverages Microsoft's best practices.</Description>
+	<Authors>Evan Gipson</Authors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CoreApi.Platform.Domain\CoreApi.Platform.Domain.csproj" />
+    <ProjectReference Include="..\CoreApi.Platform.Logic\CoreApi.Platform.Logic.csproj" />
+  </ItemGroup>
+
+</Project>

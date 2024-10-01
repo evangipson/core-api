@@ -1,0 +1,18 @@
+﻿@page "/"
+@model CoreApi.View.Api.ViewModels.HomePageModel
+
+@await Html.PartialAsync("_Style")
+
+<div class="core-api">
+    <h1>@Model.AssemblyName<span class='core-api__version'>@Model.AssemblyVersion</span></h1>
+    <p>@Model.AssemblyDescription</p>
+    <h2>Endpoints</h2>
+    <ul>
+        @foreach (var endpoint in Model.Endpoints)
+        {
+            <li>
+                <a href=@endpoint.Key>@endpoint.Key</a>: @endpoint.Value
+            </li>
+        }
+    </ul>
+</div>
