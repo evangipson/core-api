@@ -1,19 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Net.Mime;
 
 using CoreApi.Platform.Domain.Models;
 using CoreApi.Platform.Logic.Managers;
 
 namespace CoreApi.View.Api.Controllers
 {
-    [Route("/response")]
-    public class ResponseController(IResponseManager responseManager) : Controller
+    [ApiController]
+    [Route("[controller]")]
+    public class ResponseController(IResponseManager responseManager) : ControllerBase
     {
         [HttpGet]
-        [Produces("application/json")]
-        public BasicResponse GetBasicResponse(string? query) => responseManager.GetBasicResponse(query);
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public BasicResponse Get(string? query) => responseManager.GetBasicResponse(query);
 
-        [HttpGet("complex")]
-        [Produces("application/json")]
-        public ComplexResponse GetComplexResponse(string? vehicle) => responseManager.GetComplexResponse(vehicle);
+        [HttpGet("[action]")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ComplexResponse Complex(string? vehicle) => responseManager.GetComplexResponse(vehicle);
     }
 }
