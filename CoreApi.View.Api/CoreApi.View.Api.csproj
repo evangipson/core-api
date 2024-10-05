@@ -11,6 +11,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CoreApi.Platform.Domain\CoreApi.Platform.Domain.csproj" />
     <ProjectReference Include="..\CoreApi.Platform.Logic\CoreApi.Platform.Logic.csproj" />
   </ItemGroup>

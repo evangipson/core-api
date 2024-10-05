@@ -1,6 +1,10 @@
-﻿using CoreApi.Platform.Domain.ApplicationSettings;
+﻿using System.Net.Http.Headers;
+using System.Net.Mime;
+using CoreApi.Platform.Domain.ApplicationSettings;
+using CoreApi.Platform.Domain.Constants;
 using CoreApi.Platform.Logic.Factories;
 using CoreApi.Platform.Logic.Managers;
+using CoreApi.Platform.Logic.Mappings;
 using CoreApi.Platform.Logic.Providers;
 using CoreApi.Platform.Logic.Services;
 using CoreApi.View.Api.ExceptionHandlers;
@@ -28,7 +32,7 @@ namespace CoreApi.View.Api.Extensions
             builder.AddConfigurationOptions();
             builder.AddServices();
             builder.Services.AddControllers();
-            builder.Services.AddHttpClient();
+            builder.Services.AddHttpClient(DataProvidersConstants.UserSystemClientName);
 
             return builder;
         }
@@ -63,9 +67,11 @@ namespace CoreApi.View.Api.Extensions
         {
             var basicApplicationSettings = builder.Configuration.GetSection(nameof(BasicApplicationSettings));
             var complexApplicationSettings = builder.Configuration.GetSection(nameof(ComplexApplicationSettings));
+            var dataProvidersSettings = builder.Configuration.GetSection(nameof(DataProviders)).Get<List<DataProvider>>();
 
             _ = builder.Services.AddOptions<BasicApplicationSettings>().Bind(basicApplicationSettings);
             _ = builder.Services.AddOptions<ComplexApplicationSettings>().Bind(complexApplicationSettings);
+            builder.Services.Configure<DataProviders>(options => options.Providers = dataProvidersSettings);
         }
 
         /// <summary>
@@ -78,10 +84,12 @@ namespace CoreApi.View.Api.Extensions
         private static void AddServices(this WebApplicationBuilder builder)
         {
             builder.Services
+                .AddAutoMapper(mapperConfig => mapperConfig.AddMaps(typeof(UserMappingProfile)))
                 .AddScoped<IVehicleFactory, VehicleFactory>()
                 .AddScoped<IResponseManager, ResponseManager>()
                 .AddScoped<IAssemblyProvider, AssemblyProvider>()
                 .AddScoped<IIpAddressProvider, IpAddressProvider>()
+                .AddScoped<IUserService, UserService>()
                 .AddScoped<IApplicationSettingsService, ApplicationSettingsService>()
                 .AddExceptionHandler<GlobalExceptionHandler>()
                 .AddRazorPages();
